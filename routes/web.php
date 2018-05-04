@@ -11,12 +11,6 @@
 |
 */
 
-use App\Task;
-use Illuminate\Http\Request;
-
-Route::get('/', function () {
-  return redirect('/tasks');
-});
-Route::get('/tasks', 'TaskController@index');
-Route::post('/tasks', 'TaskController@store');
-Route::delete('/tasks/{id}', 'TaskController@destroy');
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');
