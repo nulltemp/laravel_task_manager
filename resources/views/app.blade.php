@@ -7,6 +7,8 @@
 
         <title>task manager</title>
 
+        <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+
         <link rel="stylesheet" href="{{ mix('css/app.css') }}"></script>
 
         <script>
@@ -17,9 +19,7 @@
     </head>
     <body>
         <div id="app">
-            <div class="container">
-                <router-view></router-view>
-            </div>
+            <router-view></router-view>
         </div>
     </body>
     <script src="{{ mix('js/app.js') }}"></script>

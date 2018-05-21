@@ -1,27 +1,20 @@
 <template>
 <div>
-  <button class="btn btn-light" data-toggle="modal" :data-target="'#deletePanelModal' + panelId" aria-hidden="true">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <div :id="'deletePanelModal' + panelId" class="modal fade" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">パネルの削除</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <div class="modal-body">
-          {{panelName}}パネルを削除しますか？
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deletePanel">削除</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-btn @click="visible = true" icon slot="activator">
+    <v-icon>close</v-icon>
+  </v-btn>
+
+  <v-dialog v-model="visible" max-width="500px" hide-overlay persistent>
+    <v-card>
+      <v-card-title primary-title>
+        {{panelName}}パネルを削除しますか？
+      </v-card-title>
+      <v-card-actions>
+        <v-btn @click="visible = false">キャンセル</v-btn>
+        <v-btn @click="deletePanel">削除</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </div>
 </template>
 
@@ -29,12 +22,18 @@
 export default {
   methods: {
     deletePanel() {
+      this.visible = false
       this.$http.delete('/api/panels/' + this.panelId)
         .then(res => {
           this.$emit('update-panels', res.data);
         })
     }
   },
-  props: ["panelName", "panelId"]
+  props: ["panelName", "panelId"],
+  data() {
+    return {
+      visible: false
+    }
+  }
 }
 </script>

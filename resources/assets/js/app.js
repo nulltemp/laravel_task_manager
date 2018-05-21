@@ -6,12 +6,15 @@
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 require('./bootstrap');
 
 window.Vue = require('vue');
 
 Vue.use(VueRouter)
+Vue.use(Vuetify)
 
 Vue.prototype.$http = window.axios;
 

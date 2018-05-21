@@ -1,25 +1,33 @@
 <template>
-<div class="container">
-  <div class="col-sm-6">
-    <input v-model="postPanelName" type="text" name="name">
-  </div>
-  <button @click="postPanel" class="btn btn-default">
-               Add Panel
-            </button>
+<div>
+  <v-container grid-list-xl>
+    <v-layout row wrap>
+      <v-flex xs5>
+        <v-text-field
+          label="パネル名"
+          v-model="postPanelName"
+        ></v-text-field>
+      </v-flex>
+      <v-flex>
+        <v-btn @click="postPanel">パネルの追加</v-btn>
+      </v-flex>
+    </v-layout>
 
-  <div class="row">
-    <div class="col-sm" v-for="panel in panels" :key="panel.id">
-      <div class="card">
-        <nav class="card-header navbar">
-          <span class="navbar-brand">{{panel.name}}</span>
-          <delete-panel-modal :panelName="panel.name" :panelId="panel.id" @update-panels="updatePanels"/>
-        </nav>
-        <div class="card-body">
-          sample
-        </div>
-      </div>
-    </div>
-  </div>
+    <v-layout row>
+      <v-flex v-for="panel in panels" :key="panel.id">
+        <v-card>
+          <v-card-title>
+            {{panel.name}}
+            <v-spacer></v-spacer>
+            <delete-panel-modal :panelName="panel.name" :panelId="panel.id" @update-panels="updatePanels"/>
+          </v-card-title>
+          <v-card-text>
+            sample
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </div>
 </template>
 
