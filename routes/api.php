@@ -17,4 +17,8 @@ Route::group(['middleware' => 'api'], function() {
     Route::get('panels', 'PanelController@index');
     Route::post('panels', 'PanelController@store');
     Route::delete('panels/{id}', 'PanelController@destroy');
+
+    Route::get('panels/{panelId}/tasks', 'TaskController@index');
+    Route::post('tasks', 'TaskController@store');
+    Route::delete('tasks/{id}', 'TaskController@destroy');
 });

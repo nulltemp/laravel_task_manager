@@ -7,23 +7,22 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-  public function index() {
-    $tasks = Task::all();
-    return view('tasks', ['tasks' => $tasks]);
+  public function index($panelId) {
+    $tasks = Task::where('panel_id', $panelId)->get();
+    return $tasks;
   }
 
   public function store(Request $request) {
     $task = new Task;
     $task->name = request('name');
-    $task->status = '';
-    $task->type = '';
+    $task->panel_id = request('panelId');
     $task->save();
-    return redirect('/tasks');
+    return $task;
   }
 
-  public function destroy(Request $request, $id, Task $task) {
+  public function destroy($id) {
     $task = Task::find($id);
     $task->delete();
-    return redirect('/tasks');
+    return $task;
   }
 }
